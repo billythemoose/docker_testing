@@ -1,8 +1,5 @@
 ### Django
-Create new model (DB)
-python manage.py makemigrations _model_name_
-
-Create new migration
+Create new model migration
 python manage.py makemigrations _project_name_
 
 Migrate 
