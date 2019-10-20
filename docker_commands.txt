@@ -1,5 +1,8 @@
-Build Components
+Create Project (django specific) 
 docker-compose run web django-admin startprject _project_name_ .
+
+Build Requirements
+docker-compose build
 
 Start docker
 docker-compose up
