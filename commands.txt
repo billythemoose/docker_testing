@@ -1,0 +1,34 @@
+### Django
+Create new model (DB)
+python manage.py makemigrations _model_name_
+
+Create new migration
+python manage.py makemigrations _project_name_
+
+Migrate 
+python manage.py migrate
+
+
+
+
+
+### Docker
+Create Project (django specific) 
+docker-compose run web django-admin startprject _project_name_ .
+
+Build Requirements
+docker-compose build
+
+Start docker
+docker-compose up
+
+Stop docker
+Separate window: docker-compose down
+Same window: Ctrl+C
+
+Display running containers
+docker ps
+
+Log in to running container
+docker exec -t -i _process_id_ bash
+
