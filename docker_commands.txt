@@ -1,0 +1,9 @@
+Build Components
+docker-compose run web django-admin startprject _project_name_ .
+
+Start docker
+docker-compose up
+
+Stop docker
+Separate window: docker-compose down
+Same window: Ctrl+C
