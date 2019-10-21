@@ -1,11 +1,12 @@
 ### Django
+Create new project 
+django-admin startapp _app_name_
+
 Create new model migration
 python manage.py makemigrations _project_name_
 
 Migrate 
 python manage.py migrate
-
-
 
 
 
