@@ -1,0 +1,22 @@
+[
+    {
+        "model": "composeexample.users",
+        "pk": 1,
+        "fields": {
+            "name": "TestUser1",
+            "email": "test1@example.com",
+            "message": "test user 1 message",
+            "created_at": "2019-10-19 00:00:00"
+        }
+    },
+    {
+        "model": "composeexample.users",
+        "pk": 2,
+        "fields": {
+            "name": "TestUser2",
+            "email": "test2@example.com",
+            "message": "test user 2 message",
+            "created_at": "2019-10-20 00:00:00"
+        }
+    }
+]
