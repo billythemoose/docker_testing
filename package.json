@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "scripts": {
+    "dev": "webpack --mode development ./composeexample/frontend/src/index.js --output ./composeexample/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./composeexample/frontend/src/index.js --output ./composeexample/frontend/static/frontend/main.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/billythemoose/docker_testing.git"
@@ -26,6 +30,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "weak-key": "^1.0.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
   }

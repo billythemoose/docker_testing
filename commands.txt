@@ -30,3 +30,7 @@ docker ps
 Log in to running container
 docker exec -t -i _process_id_ bash
 
+
+### Node
+Run a startup/build script
+npm run _script_name_in_package.json_
