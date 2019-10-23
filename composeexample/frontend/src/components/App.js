@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import DataProvider from "./DataProvider";
 import Table from "./Table";
+import axios from 'axios';
 
 /*
 const App = () => (
@@ -25,9 +26,36 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isAuthenticated: false
+      selectedFile: null
     };
+
+    
   }
+
+  onChangeHandler = event => {
+    console.log(`File being added: ${event.target.files[0].name}`);
+    this.setState({
+      selectedFile: event.target.files[0],
+      loaded: 0,
+    });
+  };
+
+  clickButton = event => {
+    console.log("Sending file to be processed...");
+    const data = new FormData();
+    data.append('file', this.state.selectedFile);
+
+    try {
+      axios.post("http://localhost:8000/upload", data, {
+
+      }).then(res =>  {
+        console.log(res.statusText)
+      });
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
 
   render() {
     return (
@@ -35,18 +63,25 @@ class App extends Component {
         <div>
           <DataProvider endpoint="api/users/" render={data => <Table data={data} />} />
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
               <form method="post" action="#" id="#">
-                <div class="form-group files">
+                <div className="form-group files">
                   <label>Upload Your Transcript </label>
-                  <input type="file" class="form-control" multiple="" />
+                  <input type="file" className="form-control" multiple="" name="file" onChange={this.onChangeHandler} />
                 </div>
               </form>
             </div>
             </div>
         </div>
+        <div className="row">
+          <div className="col-md-6">
+              <div>
+                <button type="button" onClick={this.clickButton}>Submit</button>
+              </div>
+            </div>
+          </div>
       </div>
     )
   }

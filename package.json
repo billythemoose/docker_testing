@@ -4,9 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "scripts": {
     "dev": "webpack --mode development ./composeexample/frontend/src/index.js --output ./composeexample/frontend/static/frontend/main.js",
     "build": "webpack --mode production ./composeexample/frontend/src/index.js --output ./composeexample/frontend/static/frontend/main.js"
   },
@@ -33,5 +30,10 @@
     "weak-key": "^1.0.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "react-bootstrap": "^1.0.0-beta.14"
   }
 }
