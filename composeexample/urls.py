@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -22,4 +24,6 @@ urlpatterns = [
     path('hello_world', views.HelloWorld.as_view()),
     path('api/users/', views.UserListCreate.as_view()),
     path('', include('composeexample.frontend.urls')),
+    path('upload', views.FileUploadView.as_view()),
 ]
+
