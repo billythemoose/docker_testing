@@ -38,7 +38,7 @@ class App extends Component {
   onChangeHandler = event => {
     console.log(`File being added: ${event.target.files[0].name}`);
     this.setState({
-      selectedFile: event.target.files[0],
+      selectedFile: URL.createObjectURL(event.target.files[0]),
       loaded: 0,
     });
   };
@@ -53,6 +53,7 @@ class App extends Component {
 
       }).then(res =>  {
         console.log(res.statusText)
+        console.log(res.data)
       });
     }
     catch (error) {
@@ -61,6 +62,14 @@ class App extends Component {
   };
 
   render() {
+    let transcriptImage
+    if (this.state.selectedFile != null){
+      // transcriptImage = <img src={this.state.selectedFile} />
+      transcriptImage = <object width="100%" height="400" data={this.state.selectedFile} type="application/pdf"></object>
+    }
+    else {
+      transcriptImage = <div className="transimg">No Transcript Loaded</div>
+    }
     return (
       <div id='root'>
         <div>
@@ -92,7 +101,9 @@ class App extends Component {
           <div className="rightcolumn">
             <div className="card">
               <h2>Your Transcript</h2>
-              <div className="transimg">Image</div>
+              <div className="transimg">
+                {transcriptImage}
+              </div>
               <p></p>
             </div>      
           </div>
