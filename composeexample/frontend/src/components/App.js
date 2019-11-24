@@ -5,6 +5,7 @@ import PDFViewer from './pdfviewer/pdfviewer';
 import PDFJSBackend from './backend/pdfjs';
 import Table from './Table';
 import axios from 'axios';
+import {PulseLoader} from 'react-spinners';
 import './App.css';
 
 /*
@@ -29,31 +30,52 @@ class App extends Component {
     super(props);
 
     this.state = {
-      selectedFile: null
+      selectedFile: null,
+      selectedFileUrl: null,
+      isLoading: false,
+      tableData: []
     };
 
     
   }
 
   onChangeHandler = event => {
+    console.log(event.target);
     console.log(`File being added: ${event.target.files[0].name}`);
     this.setState({
-      selectedFile: URL.createObjectURL(event.target.files[0]),
+      selectedFile: event.target.files[0],
+      selectedFileUrl: URL.createObjectURL(event.target.files[0]),
       loaded: 0,
     });
   };
 
   clickButton = event => {
+    this.setState({
+      isLoading: true
+    });
     console.log("Sending file to be processed...");
     const data = new FormData();
     data.append('file', this.state.selectedFile);
-
+    
+    var returned_result = null;
     try {
       axios.post("http://localhost:8000/upload", data, {
 
       }).then(res =>  {
-        console.log(res.statusText)
-        console.log(res.data)
+        console.log(res.statusText);
+        console.log(res.data);
+        returned_result = JSON.parse(res.data);
+        let tempArray = [];
+        for (var i = 0; i < returned_result.length; i++) {
+          // Converting JSON to react array
+          tempArray.push(returned_result[i]);
+        }
+        this.setState({
+          isLoading: false,
+          selectedFile: null,
+          selectedFileUrl: null,
+          tableData: returned_result
+        });
       });
     }
     catch (error) {
@@ -62,14 +84,49 @@ class App extends Component {
   };
 
   render() {
+
+    // Conditional for displaying transcript PDF
     let transcriptImage
     if (this.state.selectedFile != null){
-      // transcriptImage = <img src={this.state.selectedFile} />
-      transcriptImage = <object width="100%" height="400" data={this.state.selectedFile} type="application/pdf"></object>
+      console.log('Setting transcript');
+      transcriptImage = <object width="100%" height="400" data={this.state.selectedFileUrl} type="application/pdf"></object>
     }
     else {
+      console.log('Using default transcript message');
       transcriptImage = <div className="transimg">No Transcript Loaded</div>
     }
+
+    // Conditional for displaying loading icon
+    // let loadingImage
+    if (this.state.isLoading) { 
+      console.log('Loading... ');
+      transcriptImage = <PulseLoader></PulseLoader>
+    }
+
+    if (this.state.tableData.length > 0) {
+      console.log('Creating table');
+      for (var i = 0; i < this.state.tableData.length; i++) {
+        console.log(this.state.tableData[i]);
+      }
+      transcriptImage = 
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.tableData.map((key, data) => {
+              return(
+                <tr key={key}>
+                  <td>{key}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+    }
+
     return (
       <div id='root'>
         <div>
@@ -113,6 +170,7 @@ class App extends Component {
             backend={PDFJSBackend}
             src='/myPDF.pdf'/>
         </div>
+        
         <div className="footer">
             <h2>BC Advisor</h2>
         </div>
