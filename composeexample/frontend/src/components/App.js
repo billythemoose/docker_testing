@@ -82,10 +82,10 @@ class App extends Component {
               <h2>Transcript Uploader</h2>
               <h5>Upload your transcript</h5>
               <p> Upload a PDF file of your transcript:<br />
-                <input type="file" name="datasize" size="30" />
+                <input type="file" name="datasize" size="30" onChange={this.onChangeHandler} />
               </p>
                 <div>
-                  <input type="submit" value="Submit" />
+                  <input type="submit" value="Submit" onClick={this.clickButton} />
                 </div>
             </div>      
           </div>

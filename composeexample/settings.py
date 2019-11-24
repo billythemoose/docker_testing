@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'composeexample',
-    'composeexample.frontend'
+    'composeexample.frontend',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'composeexample.urls'
@@ -74,6 +78,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'composeexample.wsgi.application'
+
+# CORS Settings
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Database
